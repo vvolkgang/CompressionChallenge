@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31105.61
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompressionChallenge", "CompressionChallenge\CompressionChallenge.csproj", "{1E2D42D5-62A2-4698-931B-DC05E5524833}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{E694AE79-5B50-4E2A-8252-6E31A651EC10}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{1E2D42D5-62A2-4698-931B-DC05E5524833}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E2D42D5-62A2-4698-931B-DC05E5524833}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E2D42D5-62A2-4698-931B-DC05E5524833}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E694AE79-5B50-4E2A-8252-6E31A651EC10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E694AE79-5B50-4E2A-8252-6E31A651EC10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E694AE79-5B50-4E2A-8252-6E31A651EC10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E694AE79-5B50-4E2A-8252-6E31A651EC10}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

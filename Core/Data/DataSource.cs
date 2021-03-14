@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CompressionChallenge
+namespace Core.Data
 {
     public static class DataSource
     {
@@ -10,25 +10,25 @@ namespace CompressionChallenge
         private const string _numChars = "0123456789";
 
 
-        public static List<Data> GenerateDataList(int dataSize)
+        public static List<Contact> GenerateDataList(int dataSize)
         {
-            var list = new List<Data>(dataSize);
-            for (int i = 0; i < dataSize * 1000; i++)
+            var list = new List<Contact>(dataSize);
+            for (int i = 0; i < dataSize; i++)
             {
-                list.Add(new Data(i, "Name" + i, "123456789123", i % 2 == 0 ? DataState.State2 : DataState.State1));
+                list.Add(new Contact(i, "Name" + i, "123456789123", i % 2 == 0 ? DataState.State2 : DataState.State1));
             }
 
             return list;
         }
 
-        public static List<Data> GenerateRandomDataList(int dataSize)
+        public static List<Contact> GenerateRandomDataList(int dataSize)
         {
-            var list = new List<Data>(dataSize);
-            for (int i = 0; i < dataSize * 1000; i++)
+            var list = new List<Contact>(dataSize);
+            for (int i = 0; i < dataSize; i++)
             {
                 var nameSize = _rand.Next(5, 25);
                 
-                list.Add(new Data(
+                list.Add(new Contact(
                     i,
                     RandomString(nameSize, _nameChars),
                     $"+351{RandomString(9, _numChars)}",
