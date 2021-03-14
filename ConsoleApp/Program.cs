@@ -11,14 +11,18 @@ namespace CompressionChallenge
     {
         static void Main(string[] args)
         {
-            var contacts = 12000;
-            var repeatTests = 1;
+            Console.WriteLine("C# Serialization / Compression Challenge | Running tests now!");
+            var contacts = 15000;
+            var repeatTests = 500;
             var now = DateTime.Now;
             var scheduler = new TestScheduler();
             var result = scheduler.ExecuteTestsWithRandomData(contacts, repeatTests);
 
             var totalProcessingTime = DateTime.Now - now;
             ConsoleRenderer.RenderDocument(CreateGrid(contacts, repeatTests, totalProcessingTime, result));
+
+            Console.WriteLine("\n\nPress enter to exit...");
+            Console.ReadLine();
         }
 
         private static Document CreateGrid(int contacts, int repeatedTests, TimeSpan totalProcessingTime, List<TestResult> resultList)

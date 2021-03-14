@@ -13,12 +13,11 @@ Using JSON string as a baseline, the following format / compression combos where
 * MsgPack (no compression)
 * MsgPack + LZ4
 * MsgPack + LZ4Array
-* MsgPack + LZ4Array + GZip
 * MsgPack + GZip
 
 # Results
 
-![v1 results](/docs/results_v1.png)
+![Results](/docs/results_v2.png)
 
 
 # Credits
