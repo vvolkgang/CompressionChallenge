@@ -7,6 +7,8 @@ namespace Core
 {
     public abstract class BaseTest
     {
+        public virtual bool IsEnabled { get; } = true;
+
         public abstract string TestName { get; }
 
         public virtual bool IsBaseline { get; set; }

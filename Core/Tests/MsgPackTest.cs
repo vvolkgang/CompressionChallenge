@@ -10,7 +10,7 @@ namespace Core.Tests
 {
     public class MsgPackTest : BaseTest
     {
-        public override string TestName => "MsgPack (no compression)";
+        public override string TestName => "MsgPack (uncompressed)";
 
         public override bool IsBaseline => false;
 

@@ -20,6 +20,11 @@ namespace Core
             int baselineBytes = 1;
             foreach (var task in tasks)
             {
+                if (!task.IsEnabled)
+                {
+                    continue;
+                }
+
                 float timeTotal = 0;
                 var result = task.Execute(dataList); // warm up
                 //byte[] result = new byte[0];

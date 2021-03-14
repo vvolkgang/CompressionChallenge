@@ -11,6 +11,8 @@ namespace Core.Tests
 {
     public class MsgPackLz4GzipTest : BaseTest
     {
+        public override bool IsEnabled => false;
+
         public override string TestName => "MsgPack + LZ4 + GZip";
 
         public override bool IsBaseline => false;

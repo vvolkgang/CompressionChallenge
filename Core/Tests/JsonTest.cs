@@ -8,7 +8,7 @@ namespace Core.Tests
 {
     public class JsonTest : BaseTest
     {
-        public override string TestName => "JSON";
+        public override string TestName => "JSON (uncompressed)";
 
         public override bool IsBaseline => true;
 
