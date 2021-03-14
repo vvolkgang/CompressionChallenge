@@ -13,12 +13,15 @@ namespace CompressionChallenge
         {
             var contacts = 12000;
             var repeatTests = 100;
+            var now = DateTime.Now;
             var scheduler = new TestScheduler();
             var result = scheduler.ExecuteTasksWithRandomData(contacts, repeatTests);
-            ConsoleRenderer.RenderDocument(CreateGridv2(contacts, true, repeatTests, result));
+
+            var totalProcessingTime = DateTime.Now - now;
+            ConsoleRenderer.RenderDocument(CreateGridv2(contacts, true, repeatTests, totalProcessingTime, result));
         }
 
-        private static Document CreateGridv2(int contacts, bool randomData, int repeatedTests, List<TestResult> resultList)
+        private static Document CreateGridv2(int contacts, bool randomData, int repeatedTests, TimeSpan totalProcessingTime, List<TestResult> resultList)
         {
             var headerThickness = new LineThickness(LineWidth.Double, LineWidth.Single);
 
@@ -36,8 +39,10 @@ namespace CompressionChallenge
             };
 
             return new Document(
-                new Span("Contact List Size: ") { Color = Yellow }, contacts, "\n",
-                new Span("Tests repeated ") { Color = Yellow }, repeatedTests, new Span(" Times\n") { Color = Yellow },
+                new Span("Contact List Size: ") { Color = Magenta }, contacts, "\n",
+                new Span("Tests repeated ") { Color = Magenta }, repeatedTests, new Span(" Times\n") { Color = Magenta },
+                new Span("Total processing time (s): ") { Color = Magenta }, totalProcessingTime.TotalSeconds.ToString("0.0"), "\n",
+
                 new Grid
                 {
                     Color = Gray,
