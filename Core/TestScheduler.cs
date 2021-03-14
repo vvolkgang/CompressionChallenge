@@ -21,9 +21,15 @@ namespace Core
             foreach (var task in tasks)
             {
                 float timeTotal = 0;
-                byte[] result = new byte[0];
+                var result = task.Execute(dataList); // warm up
+                //byte[] result = new byte[0];
                 for (int i = 0; i < repeatTest; i++)
                 {
+                    // force cleanup
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
+                    GC.Collect();
+
                     var watch = Stopwatch.StartNew();
 
                     result = task.Execute(dataList);
