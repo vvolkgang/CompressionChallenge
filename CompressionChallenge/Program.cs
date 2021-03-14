@@ -12,12 +12,13 @@ namespace CompressionChallenge
         static void Main(string[] args)
         {
             var contacts = 12000;
+            var repeatTests = 100;
             var scheduler = new TestScheduler();
-            var result = scheduler.ExecuteTasksWithRandomData(contacts);
-            ConsoleRenderer.RenderDocument(CreateGridv2(contacts, true, result));
+            var result = scheduler.ExecuteTasksWithRandomData(contacts, repeatTests);
+            ConsoleRenderer.RenderDocument(CreateGridv2(contacts, true, repeatTests, result));
         }
 
-        private static Document CreateGridv2(int contacts, bool randomData, List<TestResult> resultList)
+        private static Document CreateGridv2(int contacts, bool randomData, int repeatedTests, List<TestResult> resultList)
         {
             var headerThickness = new LineThickness(LineWidth.Double, LineWidth.Single);
 
@@ -36,24 +37,23 @@ namespace CompressionChallenge
 
             return new Document(
                 new Span("Contact List Size: ") { Color = Yellow }, contacts, "\n",
-                new Span("Random Data? ") { Color = Yellow }, randomData, "\n",
+                new Span("Tests repeated ") { Color = Yellow }, repeatedTests, new Span(" Times\n") { Color = Yellow },
                 new Grid
                 {
                     Color = Gray,
                     Columns = { GridLength.Auto, GridLength.Auto, GridLength.Auto, GridLength.Auto, GridLength.Auto },
                     Children = {
-                        new Cell("Method") { Stroke = headerThickness },
-                        new Cell("Bytes") { Stroke = headerThickness },
-                        new Cell("KB") { Stroke = headerThickness },
-                        new Cell("Gain %") { Stroke = headerThickness },
-                        new Cell("Time (ms)") { Stroke = headerThickness },
+                        new Cell("Test Method") { Stroke = headerThickness, Align = Align.Center },
+                        new Cell(" Bytes ") { Stroke = headerThickness, Align = Align.Center },
+                        new Cell(" KB ") { Stroke = headerThickness, Align = Align.Center },
+                        new Cell(" Gain % ") { Stroke = headerThickness, Align = Align.Center },
+                        new Cell(" Time Avg (ms) ") { Stroke = headerThickness, Align = Align.Center },
                         resultList.Select(item => new[] {
                             new Cell(item.Method) { Color = Yellow },
                             new Cell(item.Size.Bytes),
                             new Cell(item.Size.KiloBytes.ToString("0.0")) { Align = Align.Right },
                             new Cell(GainToString(item.GainPerc)) { Color = GetGainColor(item.GainPerc) },
-                            new Cell(item.ExecutionTime.TotalMilliseconds),
-
+                            new Cell(item.ExecutionTimeInMs),
                         })
                     }
                 });
