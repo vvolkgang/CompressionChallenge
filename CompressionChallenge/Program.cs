@@ -56,9 +56,9 @@ namespace CompressionChallenge
                         resultList.Select(item => new[] {
                             new Cell(item.Method) { Color = Yellow },
                             new Cell(item.Size.Bytes),
-                            new Cell(item.Size.KiloBytes.ToString("0.0")) { Align = Align.Right },
+                            new Cell(item.Size.KiloBytes.ToString("0 ")),
                             new Cell(GainToString(item.GainPerc)) { Color = GetGainColor(item.GainPerc) },
-                            new Cell(item.ExecutionTimeInMs),
+                            new Cell(item.ExecutionTimeInMs.ToString("0.#")),
                         })
                     }
                 });
