@@ -12,16 +12,16 @@ namespace CompressionChallenge
         static void Main(string[] args)
         {
             var contacts = 12000;
-            var repeatTests = 100;
+            var repeatTests = 1;
             var now = DateTime.Now;
             var scheduler = new TestScheduler();
-            var result = scheduler.ExecuteTasksWithRandomData(contacts, repeatTests);
+            var result = scheduler.ExecuteTestsWithRandomData(contacts, repeatTests);
 
             var totalProcessingTime = DateTime.Now - now;
-            ConsoleRenderer.RenderDocument(CreateGridv2(contacts, true, repeatTests, totalProcessingTime, result));
+            ConsoleRenderer.RenderDocument(CreateGrid(contacts, repeatTests, totalProcessingTime, result));
         }
 
-        private static Document CreateGridv2(int contacts, bool randomData, int repeatedTests, TimeSpan totalProcessingTime, List<TestResult> resultList)
+        private static Document CreateGrid(int contacts, int repeatedTests, TimeSpan totalProcessingTime, List<TestResult> resultList)
         {
             var headerThickness = new LineThickness(LineWidth.Double, LineWidth.Single);
 
@@ -35,7 +35,7 @@ namespace CompressionChallenge
             string GainToString(double gainPerc) => gainPerc switch
             {
                 0 => "-",
-                _ => gainPerc.ToString("0.0%")
+                _ => gainPerc.ToString("0.#%")
             };
 
             return new Document(

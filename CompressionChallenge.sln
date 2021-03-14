@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31105.61
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompressionChallenge", "CompressionChallenge\CompressionChallenge.csproj", "{1E2D42D5-62A2-4698-931B-DC05E5524833}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{1E2D42D5-62A2-4698-931B-DC05E5524833}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{E694AE79-5B50-4E2A-8252-6E31A651EC10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{E694AE79-5B50-4E2A-8252-6E31A651EC10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

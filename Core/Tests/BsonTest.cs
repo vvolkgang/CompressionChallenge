@@ -12,7 +12,7 @@ namespace Core.Tests
 
         public override bool IsBaseline => false;
 
-        public override string Filename => "task.bson";
+        public override string Filename => "test.bson";
 
         public override byte[] Execute(List<Contact> list)
         {

@@ -17,7 +17,7 @@ namespace Core.Tests
 
         public override bool IsBaseline => false;
 
-        public override string Filename => "task.msgpacklz4gz";
+        public override string Filename => "test.msgpacklz4gz";
 
         public override byte[] Execute(List<Contact> list)
         {

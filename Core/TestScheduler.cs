@@ -13,22 +13,22 @@ namespace Core
 
     public class TestScheduler
     {
-        public List<TestResult> ExecuteTasksWithRandomData(int contacts, int repeatTest)
+        public List<TestResult> ExecuteTestsWithRandomData(int contacts, int repeatTest)
         {
             var dataList = DataSource.GenerateRandomDataList(contacts);
-            var tasks = GetAllTasks();
-            var output = new List<TestResult>(tasks.Count);
+            var tests = GetAllTests();
+            var output = new List<TestResult>(tests.Count);
 
             int baselineBytes = 1;
-            foreach (var task in tasks)
+            foreach (var test in tests)
             {
-                if (!task.IsEnabled)
+                if (!test.IsEnabled)
                 {
                     continue;
                 }
 
                 float timeTotal = 0;
-                var result = task.Execute(dataList); // warm up
+                var result = test.Execute(dataList); // warm up
                 //byte[] result = new byte[0];
                 for (int i = 0; i < repeatTest; i++)
                 {
@@ -40,7 +40,7 @@ namespace Core
 #endif
                     var watch = Stopwatch.StartNew();
 
-                    result = task.Execute(dataList);
+                    result = test.Execute(dataList);
 
                     watch.Stop();
                     timeTotal = timeTotal + watch.ElapsedMilliseconds;
@@ -49,7 +49,7 @@ namespace Core
                 var elapsedMs = timeTotal / repeatTest;
 
                 float gain;
-                if (task.IsBaseline)
+                if (test.IsBaseline)
                 {
                     baselineBytes = result.Length;
                     gain = 0;
@@ -59,7 +59,7 @@ namespace Core
                     gain = CalcGain(baselineBytes, result.Length);
                 }
 
-                output.Add(new TestResult(task.TestName, ByteSize.FromBytes(result.Length), gain, elapsedMs));
+                output.Add(new TestResult(test.TestName, ByteSize.FromBytes(result.Length), gain, elapsedMs));
             }
 
             output.Sort((a, b) => a.GainPerc.CompareTo(b.GainPerc));
@@ -67,7 +67,7 @@ namespace Core
             return output;
         }
 
-        private List<BaseTest> GetAllTasks()
+        private List<BaseTest> GetAllTests()
         {
             return typeof(BaseTest)
                 .Assembly.GetTypes()
@@ -77,7 +77,6 @@ namespace Core
                 .ToList();
         }
 
-        private static float CalcGain(int baselineBytes, int taskBytes) => 1 - taskBytes / (float)baselineBytes;
-
+        private static float CalcGain(int baselineBytes, int testBytes) => 1 - testBytes / (float)baselineBytes;
     }
 }

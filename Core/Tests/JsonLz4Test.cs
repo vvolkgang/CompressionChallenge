@@ -13,7 +13,7 @@ namespace Core.Tests
 
         public override bool IsBaseline => false;
 
-        public override string Filename => "task.jsonlz4";
+        public override string Filename => "test.jsonlz4";
 
         public override byte[] Execute(List<Contact> list)
         {
