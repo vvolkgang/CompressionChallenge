@@ -16,7 +16,7 @@ Each contact has:
 
 The JSON serialization of one contact looks like this:
 
-`{"ID":0,"Name":"rQGPnBpGJT","Contact":"+351445593358","State":2}`
+`{"ID":0,"Name":"rQGPnBpGJT","PhoneNumber":"+351445593358","State":2}`
 
 # The Contenders
 
