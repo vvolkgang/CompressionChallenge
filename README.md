@@ -5,6 +5,21 @@ This project started with two questions:
 * Could 15k contacts be stored in a 1.44MB floppy disk?
 * How much space can we save by improving the data serialization and adding compression?
 
+# The Data
+
+Each contact has:
+
+* ID: int
+* Name: String with 5 to 24 random chars
+* PhoneNumber: String with a fixed country code and 9 random digits
+* DataState: Generic enum with 3 states defined
+
+The JSON serialization of one contact looks like this:
+
+`{"ID":0,"Name":"rQGPnBpGJT","Contact":"+351445593358","State":2}`
+
+# The Contenders
+
 Using JSON string as a baseline, the following format / compression combos where used:
 
 * BSON (no compression)
