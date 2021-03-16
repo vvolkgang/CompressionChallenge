@@ -8,13 +8,13 @@ using System.Text;
 
 namespace Core.Tests
 {
-    public class JsonGzip : BaseTest
+    public class JsonGzipFast : BaseTest
     {
-        public override string TestName => "JSON + GZip Slow";
+        public override string TestName => "JSON + GZip Fast";
 
         public override bool IsBaseline => false;
 
-        public override string Filename => "test.jsongzip";
+        public override string Filename => "test.jsongzf";
 
         public override byte[] Execute(List<Contact> list)
         {
@@ -22,7 +22,7 @@ namespace Core.Tests
 
             var ms = new MemoryStream();
             using (var source = new MemoryStream(Encoding.Default.GetBytes(json)))
-            using (var compressorStream = new GZipStream(ms, CompressionLevel.Optimal, true)) //GZipStream adds CRC to ensure data correctness
+            using (var compressorStream = new GZipStream(ms, CompressionLevel.Fastest, true)) //GZipStream adds CRC to ensure data correctness
             {
                 source.CopyTo(compressorStream);
             }

@@ -24,16 +24,22 @@ Using JSON string as a baseline, the following format / compression combos where
 
 * BSON (no compression)
 * JSON + LZ4
-* JSON + Gzip
+* JSON + Gzip Fast and Slow
 * MsgPack (no compression)
 * MsgPack + LZ4
 * MsgPack + LZ4Array
-* MsgPack + GZip
+* MsgPack + GZip Fast and Slow
+* MsgPack + Brotli Fast and Slow (Brotli slow is _*slow*_, like 1.5s slow in my machine, disabled it by default)
 
 # Results
 
-![Results](/docs/results_v2.png)
+![Results](/docs/results_v3.png)
 
+# How to add a new test
+
+Tests (located in: `Core/Tests/`) are loaded in runtime using reflection. Anything inherithing `BaseTest` will automatically be executed. 
+
+Just copy `JsonTest.cs` and add your own implementation to it.
 
 # Credits
 
@@ -44,3 +50,5 @@ Using JSON string as a baseline, the following format / compression combos where
 * [Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json)
 * [ByteSize](https://github.com/omar/ByteSize)
     * Currently not supporting .net5, added the files to the project directly
+
+

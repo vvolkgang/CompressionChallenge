@@ -6,13 +6,13 @@ using System.IO.Compression;
 
 namespace Core.Tests
 {
-    public class MsgPackGzipTest : BaseTest
+    public class MsgPackBrotliFastTest : BaseTest
     {
-        public override string TestName => "MsgPack + GZip Slow";
+        public override string TestName => "MsgPack + Brotli Fast";
 
         public override bool IsBaseline => false;
 
-        public override string Filename => "test.msgpackgz";
+        public override string Filename => "test.msgpackbr";
 
         public override byte[] Execute(List<Contact> list)
         {
@@ -20,7 +20,7 @@ namespace Core.Tests
 
             var ms = new MemoryStream();
             using (var source = new MemoryStream(pack))
-            using (var compressorStream = new GZipStream(ms, CompressionLevel.Optimal, true)) //GZipStream adds CRC to ensure data correctness
+            using (var compressorStream = new BrotliStream(ms, CompressionLevel.Fastest)) 
             {
                 source.CopyTo(compressorStream);
             }

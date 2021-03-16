@@ -1,6 +1,4 @@
-﻿//#define FORCE_GC
-
-using ByteSizeLib;
+﻿using ByteSizeLib;
 using Core.Data;
 using System;
 using System.Collections.Generic;
@@ -27,17 +25,16 @@ namespace Core
                     continue;
                 }
 
+                // force cleanup
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                GC.Collect();
+
                 float timeTotal = 0;
                 var result = test.Execute(dataList); // warm up
                 //byte[] result = new byte[0];
                 for (int i = 0; i < repeatTest; i++)
                 {
-#if FORCE_GC
-                    // force cleanup
-                    GC.Collect();
-                    GC.WaitForPendingFinalizers();
-                    GC.Collect();
-#endif
                     var watch = Stopwatch.StartNew();
 
                     result = test.Execute(dataList);
