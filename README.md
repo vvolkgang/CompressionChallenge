@@ -34,6 +34,11 @@ Using JSON string as a baseline, the following format / compression combos where
 
 ![Results](/docs/results_v2.png)
 
+# How to add a new test
+
+Tests (located in: `Core/Tests/`) are loaded in runtime using reflection. Anything inherithing `BaseTest` will automatically be executed. 
+
+Just copy `JsonTest.cs` and add your own implementation to it.
 
 # Credits
 
