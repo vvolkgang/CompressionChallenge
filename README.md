@@ -22,14 +22,16 @@ The JSON serialization of one contact looks like this:
 
 Using JSON string as a baseline, the following format / compression combos where used:
 
-* BSON (no compression)
+* BSON (uncompressed)
 * JSON + LZ4
 * JSON + Gzip Fast and Slow
-* MsgPack (no compression)
+* MsgPack (uncompressed)
+* System.Text.Json (uncompressed)
 * MsgPack + LZ4
 * MsgPack + LZ4Array
 * MsgPack + GZip Fast and Slow
 * MsgPack + Brotli Fast and Slow (Brotli slow is _*slow*_, like 1.5s slow in my machine, disabled it by default)
+* Apex.Serialization, uncompressed + GZip
 
 # Results
 
@@ -50,5 +52,6 @@ Just copy `JsonTest.cs` and add your own implementation to it.
 * [Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json)
 * [ByteSize](https://github.com/omar/ByteSize)
     * Currently not supporting .net5, added the files to the project directly
+* [Apex.Serialization](https://github.com/dbolin/Apex.Serialization/)
 
 

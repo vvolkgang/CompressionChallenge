@@ -9,7 +9,7 @@ namespace Core.Tests
     {
         public override string TestName => "System.Text.Json (uncompressed)";
 
-        public override string Filename => "test.json";
+        public override string Filename => "test.msjson";
         
         public override byte[] Execute(List<Contact> list)
         {
