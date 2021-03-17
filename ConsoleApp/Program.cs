@@ -13,7 +13,7 @@ namespace CompressionChallenge
         {
             Console.WriteLine("C# Serialization / Compression Challenge | Running tests now!");
             var contacts = 15000;
-            var repeatTests = 500;
+            var repeatTests = 50;
             var now = DateTime.Now;
             var scheduler = new TestScheduler();
             var result = scheduler.ExecuteTestsWithRandomData(contacts, repeatTests);

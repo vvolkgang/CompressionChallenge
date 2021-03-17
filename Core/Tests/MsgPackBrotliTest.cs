@@ -8,7 +8,7 @@ namespace Core.Tests
 {
     public class MsgPackBrotliTest : BaseTest
     {
-        public override bool IsEnabled => false;
+        public override bool IsEnabled => true;
 
         public override string TestName => "MsgPack + Brotli Slow";
 
