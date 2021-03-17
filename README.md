@@ -32,6 +32,8 @@ Using JSON string as a baseline, the following format / compression combos where
 * MsgPack + GZip Fast and Slow
 * MsgPack + Brotli Fast and Slow (Brotli slow is _*slow*_, like 1.5s slow in my machine, disabled it by default)
 * Apex.Serialization, uncompressed + GZip
+* GroBuf, uncompressed + GZip
+
 
 # Results
 
@@ -53,5 +55,6 @@ Just copy `JsonTest.cs` and add your own implementation to it.
 * [ByteSize](https://github.com/omar/ByteSize)
     * Currently not supporting .net5, added the files to the project directly
 * [Apex.Serialization](https://github.com/dbolin/Apex.Serialization/)
+* [GroBuf](https://github.com/skbkontur/GroBuf/)
 
 
