@@ -37,7 +37,7 @@ Using JSON string as a baseline, the following format / compression combos where
 
 # Results
 
-![Results](/docs/results_v3.png)
+![Results](/docs/results_v4.png)
 
 # How to add a new test
 
