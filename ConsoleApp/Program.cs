@@ -27,6 +27,7 @@ namespace CompressionChallenge
 
         private static Document CreateGrid(int contacts, int repeatedTests, TimeSpan totalProcessingTime, List<TestResult> resultList)
         {
+            var fastestList = resultList.OrderBy(a => a.ExecutionTimeInMs).Take(7);
             var headerThickness = new LineThickness(LineWidth.Double, LineWidth.Single);
 
             ConsoleColor GetGainColor(double gainPerc) => gainPerc switch
@@ -58,7 +59,7 @@ namespace CompressionChallenge
                         new Cell(" Gain % ") { Stroke = headerThickness, Align = Align.Center },
                         new Cell(" Time Avg (ms) ") { Stroke = headerThickness, Align = Align.Center },
                         resultList.Select(item => new[] {
-                            new Cell(item.Method) { Color = Yellow },
+                            new Cell(item.Method) { Color = fastestList.Contains(item) ? Yellow : DarkYellow },
                             new Cell(item.Size.Bytes),
                             new Cell(item.Size.KiloBytes.ToString("0 ")),
                             new Cell(GainToString(item.GainPerc)) { Color = GetGainColor(item.GainPerc) },
