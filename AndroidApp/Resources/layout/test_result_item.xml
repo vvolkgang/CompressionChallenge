@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:showIn="@layout/activity_main">
+
+    <TextView
+        android:id="@+id/result_method"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="Badjoras Test "/>
+
+    <TextView
+        android:id="@+id/result_bytes_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/result_method"
+        android:text="Bytes"/>
+    <TextView
+        android:id="@+id/result_bytes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/result_bytes_title"
+        app:layout_constraintTop_toBottomOf="@id/result_method"
+        tools:text="1234 "/>
+
+    <TextView
+        android:id="@+id/result_kb_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/result_bytes"
+        android:text="KB"/>
+    <TextView
+        android:id="@+id/result_kb"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/result_kb_title"
+        app:layout_constraintTop_toBottomOf="@id/result_bytes"
+        tools:text="1"/>
+
+    <TextView
+        android:id="@+id/result_diff_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/result_kb"
+        android:text="Size Diff %"/>
+    <TextView
+        android:id="@+id/result_diff"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/result_diff_title"
+        app:layout_constraintTop_toBottomOf="@id/result_kb"
+        tools:text="10%"/>
+
+    <TextView
+        android:id="@+id/result_time_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/result_diff"
+        android:text="Time Avg (ms)"/>
+    <TextView
+        android:id="@+id/result_time"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/result_time_title"
+        app:layout_constraintTop_toBottomOf="@id/result_diff"
+        tools:text="15"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

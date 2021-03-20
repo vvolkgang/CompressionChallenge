@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Core
 {
@@ -11,6 +12,11 @@ namespace Core
 
     public class TestScheduler
     {
+        public Task<List<TestResult>> ExecuteTestsAsync(int contacts, int repeatTest)
+        {
+            return Task.Run(() => ExecuteTestsWithRandomData(contacts, repeatTest));
+        }
+
         public List<TestResult> ExecuteTestsWithRandomData(int contacts, int repeatTest)
         {
             var dataList = DataSource.GenerateRandomDataList(contacts);
