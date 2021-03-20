@@ -51,6 +51,8 @@ namespace AndroidApp.Adapters
         }
 
         public static Java.Util.IComparator GetBytesComparator() => new BytesComparator();
+
+        public static Java.Util.IComparator GetSizeDiffComparator() => new SizeDiffComparator();
         
         public static Java.Util.IComparator GetTimeComparator() => new TimeComparator();
 
@@ -61,6 +63,16 @@ namespace AndroidApp.Adapters
                 var r1 = (ResultViewModel)lhs;
                 var r2 = (ResultViewModel)rhs;
                 return r1._size.CompareTo(r2._size);
+            }
+        }
+
+        private class SizeDiffComparator : Java.Lang.Object, Java.Util.IComparator
+        {
+            public int Compare(Java.Lang.Object lhs, Java.Lang.Object rhs)
+            {
+                var r1 = (ResultViewModel)lhs;
+                var r2 = (ResultViewModel)rhs;
+                return r1._gainPerc.CompareTo(r2._gainPerc);
             }
         }
 

@@ -36,13 +36,15 @@ namespace AndroidApp
             navigation.SetOnNavigationItemSelectedListener(this);
             SetupTable(new List<TestResult>());
 
+            textMessage.Text = "Executing Tests...";
+
             var contacts = 1000;
             var repeatTests = 1;
             var now = DateTime.Now;
             var scheduler = new TestScheduler();
             var result = await scheduler.ExecuteTestsAsync(contacts, repeatTests);
+            _tableAdapter.AddAll(ResultViewModel.From(result));
 
-            _tableAdapter.AddAll(result);
             textMessage.Text = "Done!";
         }
 
@@ -60,14 +62,17 @@ namespace AndroidApp
             resultTableView.HeaderSortStateViewProvider = SortStateViewProviders.BrightArrows();
 
             resultTableView.SetColumnWeight(0, 2);
-            resultTableView.SetColumnWeight(1, 3);
-            resultTableView.SetColumnWeight(2, 3);
+            resultTableView.SetColumnWeight(1, 2);
+            resultTableView.SetColumnWeight(2, 2);
             resultTableView.SetColumnWeight(3, 2);
-            resultTableView.SetColumnWeight(4, 2);
+            resultTableView.SetColumnWeight(4, 3);
 
-            resultTableView.SetColumnComparator(0, ResultViewModel.GetBytesComparator());
-            resultTableView.SetColumnComparator(1, ResultViewModel.GetTimeComparator());
+            resultTableView.SetColumnComparator(1, ResultViewModel.GetBytesComparator());
+            resultTableView.SetColumnComparator(3, ResultViewModel.GetSizeDiffComparator());
+            resultTableView.SetColumnComparator(4, ResultViewModel.GetTimeComparator());
+
             _tableAdapter = new ResultsTableAdapter(this, ResultViewModel.From(results));
+            resultTableView.DataAdapter = _tableAdapter;
             resultTableView.DataClick += (sender, e) =>
             {
                 var result = (ResultViewModel)e.ClickedData;

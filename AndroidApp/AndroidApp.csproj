@@ -109,9 +109,15 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher_round.png" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Xamarin.Android.Support.Vector.Drawable">
+      <Version>28.0.0.3</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.2.0.5" />
     <PackageReference Include="Xamarin.AndroidX.ConstraintLayout">
       <Version>2.0.4.2</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData">
+      <Version>2.3.0.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.AndroidX.RecyclerView">
       <Version>1.1.0.8</Version>
