@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2c3e50</color>
-    <color name="colorPrimaryDark">#1B3147</color>
-    <color name="colorAccent">#3498db</color>
+  <color name="colorPrimary">#2c3e50</color>
+  <color name="colorPrimaryDark">#1B3147</color>
+  <color name="colorAccent">#3498db</color>
+
+
+  <color name="primaryDark">#FF283593</color>
+  <color name="table_header">#FF3F51B5</color>
+  <color name="table_header_text">#CCFFFFFF</color>
+  <color name="table_data_row_even">#11C5CAE9</color>
+  <color name="table_data_row_odd">#33C5CAE9</color>
 </resources>
