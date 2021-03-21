@@ -1,4 +1,5 @@
 ﻿using Android.App;
+using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -17,7 +18,7 @@ using System.Collections.Generic;
 
 namespace AndroidApp
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Landscape)]
     public class MainActivity : AppCompatActivity, BottomNavigationView.IOnNavigationItemSelectedListener
     {
         TextView textMessage;
@@ -30,29 +31,32 @@ namespace AndroidApp
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.activity_main);
-
-            textMessage = FindViewById<TextView>(Resource.Id.message);
+            
             BottomNavigationView navigation = FindViewById<BottomNavigationView>(Resource.Id.navigation);
             navigation.SetOnNavigationItemSelectedListener(this);
+
+            if (_tableAdapter != null)
+                return;
+
             SetupTable(new List<TestResult>());
 
-            textMessage.Text = "Executing Tests...";
-
             var contacts = 1000;
-            var repeatTests = 1;
+            var repeatTests = 10;
             var now = DateTime.Now;
             var scheduler = new TestScheduler();
             var result = await scheduler.ExecuteTestsAsync(contacts, repeatTests);
             _tableAdapter.AddAll(ResultViewModel.From(result));
 
-            textMessage.Text = "Done!";
+            var delta = DateTime.Now - now;
+            var resultString = $"Processing time (s): { delta.TotalSeconds.ToString("0.0") }";
+            Toast.MakeText(this, resultString, ToastLength.Short).Show();
         }
 
         private void SetupTable(List<TestResult> results)
         {
             var resultTableView = FindViewById<SortableTableView>(Resource.Id.tableView);
 
-            var simpleTableHeaderAdapter = new SimpleTableHeaderAdapter(this, "Method", "Bytes", "KB", "Size Diff", "Time Avg (ms)");
+            var simpleTableHeaderAdapter = new SimpleTableHeaderAdapter(this, "Method", "Bytes", "KB", "Size Diff", "Time (ms)");
             simpleTableHeaderAdapter.SetTextColor(ContextCompat.GetColor(this, Resource.Color.table_header_text));
             resultTableView.HeaderAdapter = simpleTableHeaderAdapter;
 
@@ -61,14 +65,13 @@ namespace AndroidApp
             resultTableView.SetDataRowBackgroundProvider(TableDataRowBackgroundProviders.AlternatingRowColors(rowColorEven, rowColorOdd));
             resultTableView.HeaderSortStateViewProvider = SortStateViewProviders.BrightArrows();
 
-            resultTableView.SetColumnWeight(0, 2);
+            resultTableView.SetColumnWeight(0, 3);
             resultTableView.SetColumnWeight(1, 2);
             resultTableView.SetColumnWeight(2, 2);
             resultTableView.SetColumnWeight(3, 2);
-            resultTableView.SetColumnWeight(4, 3);
+            resultTableView.SetColumnWeight(4, 2);
 
             resultTableView.SetColumnComparator(1, ResultViewModel.GetBytesComparator());
-            resultTableView.SetColumnComparator(3, ResultViewModel.GetSizeDiffComparator());
             resultTableView.SetColumnComparator(4, ResultViewModel.GetTimeComparator());
 
             _tableAdapter = new ResultsTableAdapter(this, ResultViewModel.From(results));

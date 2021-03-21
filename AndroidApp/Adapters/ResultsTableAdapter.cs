@@ -1,5 +1,6 @@
 ﻿using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -21,12 +22,13 @@ namespace AndroidApp.Adapters
         private float _gainPerc;
         private float _executionTimeInMs;
 
-        public ResultViewModel(TestResult result)
+        public ResultViewModel(TestResult result, bool isHighlighted)
         {
             Method = result.Method;
             _size = result.Size;
             _gainPerc = result.GainPerc;
             _executionTimeInMs = result.ExecutionTimeInMs;
+            IsHighlighted = isHighlighted;
         }
 
         public string Method { get; private set; }
@@ -36,8 +38,25 @@ namespace AndroidApp.Adapters
         public string KBytes => _size.KiloBytes.ToString("F0");
 
         public string SizeDiff => GainToString(_gainPerc);
+        
+        public bool ShouldColorSizeDiff => _gainPerc != 0;
 
         public string TimeAvg => _executionTimeInMs.ToString();
+
+        public bool IsHighlighted { get; }
+
+        public Color SizeDiffColor => GainToColor(_gainPerc);
+
+        private Color GainToColor(float gainPerc)
+        {
+            if (gainPerc == 0)
+                return Color.Black;
+
+            if (gainPerc > 0)
+                return Color.Green;
+
+            return Color.Red;
+        }
 
         string GainToString(double gainPerc) => gainPerc switch
         {
@@ -47,7 +66,9 @@ namespace AndroidApp.Adapters
 
         public static List<ResultViewModel> From(List<TestResult> result)
         {
-            return result.Select(x => new ResultViewModel(x)).ToList();
+            var fastestList = result.OrderBy(a => a.ExecutionTimeInMs).Take(7);
+
+            return result.Select(r => new ResultViewModel(r, fastestList.Contains(r))).ToList();
         }
 
         public static Java.Util.IComparator GetBytesComparator() => new BytesComparator();
@@ -89,7 +110,8 @@ namespace AndroidApp.Adapters
 
     public class ResultsTableAdapter : TableDataAdapter
     {
-        private const int TextSize = 14;
+        private const int ValueTextSize = 24;
+        private const int MethodTextSize = 16;
 
         public ResultsTableAdapter(Context context, IList data)
             : base(context, data)
@@ -104,7 +126,7 @@ namespace AndroidApp.Adapters
             switch (columnIndex)
             {
                 case 0:
-                    renderedView = RenderText(model.Method);
+                    renderedView = RenderText(model.Method, MethodTextSize, model.IsHighlighted);
                     break;
                 case 1:
                     renderedView = RenderText(model.Bytes);
@@ -113,7 +135,7 @@ namespace AndroidApp.Adapters
                     renderedView = RenderText(model.KBytes);
                     break;
                 case 3:
-                    renderedView = RenderText(model.SizeDiff);
+                    renderedView = RenderSizeDiff(model.SizeDiff, model.ShouldColorSizeDiff, model.SizeDiffColor);
                     break;
                 case 4:
                     renderedView = RenderText(model.TimeAvg);
@@ -123,13 +145,28 @@ namespace AndroidApp.Adapters
             return renderedView;
         }
 
-        private View RenderText(string text)
+        private View RenderSizeDiff(string text, bool shouldColorSizeDiff, Color sizeDiffColor)
         {
             var textView = new TextView(Context);
             textView.Text = text;
             textView.SetPadding(20, 10, 20, 10);
-            textView.TextSize = TextSize;
+            textView.TextSize = ValueTextSize;
+            
+            if(shouldColorSizeDiff)
+                textView.SetTextColor(sizeDiffColor);
 
+            return textView;
+        }
+
+        private View RenderText(string text, float textSize = ValueTextSize, bool isHighlighted = false)
+        {
+            var textView = new TextView(Context);
+            textView.Text = text;
+            textView.SetPadding(20, 10, 20, 10);
+            textView.TextSize = textSize;
+
+            if (isHighlighted)
+                textView.Typeface = Typeface.DefaultBold;
             return textView;
         }
 

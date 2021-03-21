@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,22 +7,10 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_alignParentTop="true"
-        android:text="@string/title_home" />
-
     <de.codecrafters.tableview.SortableTableView
         android:id="@+id/tableView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/message"
         app:tableView_columnCount="5"
         app:tableView_headerElevation="10"
         app:tableView_headerColor="@color/table_header" />
@@ -38,4 +26,4 @@
         android:layout_alignParentBottom="true"
         app:menu="@menu/navigation" />
 
-</RelativeLayout>
+</LinearLayout>
