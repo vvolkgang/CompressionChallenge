@@ -39,6 +39,9 @@ Using JSON string as a baseline, the following format / compression combos where
 
 ![Results](/docs/results_v4.png)
 
+Xamarin Android:
+![Results Android](/docs/android_v1.png)
+
 # How to add a new test
 
 Tests (located in: `Core/Tests/`) are loaded in runtime using reflection. Anything inherithing `BaseTest` will automatically be executed. 
