@@ -8,6 +8,8 @@ namespace Core.Tests
 {
     public class ApexGzipTest : BaseTest
     {
+        public override bool IsEnabled => false; // Crashes on Android
+
         public override string TestName => "Apex v1.3.4 + GZip Slow";
 
         public override string Filename => "test.msgpackgz";

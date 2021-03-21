@@ -7,6 +7,8 @@ namespace Core.Tests
 {
     public class ApexTest : BaseTest
     {
+        public override bool IsEnabled => true;
+
         public override string TestName => "Apex v1.3.4 (uncompressed)";
 
         public override string Filename => "test.apex";
